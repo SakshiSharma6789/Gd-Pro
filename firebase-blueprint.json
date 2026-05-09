@@ -1,0 +1,73 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private information about the user.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Topic": {
+      "title": "GD Topic",
+      "description": "Predefined topics for practice.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["Easy", "Medium", "Hard"] }
+      },
+      "required": ["title", "category", "difficulty"]
+    },
+    "Feedback": {
+      "title": "AI Feedback",
+      "description": "Structured feedback from Gemini AI.",
+      "type": "object",
+      "properties": {
+        "overallScore": { "type": "number" },
+        "relevance": { "type": "number" },
+        "clarity": { "type": "number" },
+        "structure": { "type": "number" },
+        "confidence": { "type": "number" },
+        "strengths": { "type": "array", "items": { "type": "string" } },
+        "mistakes": { "type": "array", "items": { "type": "string" } },
+        "missingPoints": { "type": "array", "items": { "type": "string" } },
+        "improvedAnswer": { "type": "string" },
+        "tips": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "PracticeSession": {
+      "title": "Practice Session",
+      "description": "A single GD practice attempt.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "topicId": { "type": "string" },
+        "topicTitle": { "type": "string" },
+        "topicCategory": { "type": "string" },
+        "answerText": { "type": "string" },
+        "durationSeconds": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "feedback": { "$ref": "Feedback" }
+      },
+      "required": ["userId", "topicId", "answerText", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "topics/{topicId}": {
+      "schema": "Topic",
+      "description": "Available GD topics."
+    },
+    "practiceSessions/{sessionId}": {
+      "schema": "PracticeSession",
+      "description": "User practice sessions and results."
+    }
+  }
+}

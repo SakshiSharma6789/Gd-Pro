@@ -1,0 +1,12 @@
+{
+  "name": "GD Pro: AI-Powered Practice Platform",
+  "description": "A premium full-stack platform for practicing Group Discussions with real-time speech-to-text, AI-driven evaluation, and detailed performance analytics.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": [
+    "AI Evaluation",
+    "Speech-to-Text",
+    "Real-time Feedback"
+  ]
+}
